@@ -1,0 +1,114 @@
+{
+  "courses": [
+    {
+      "id": 1,
+      "courseType": "Programming",
+      "ratings": 4.5,
+      "courseName": "JavaScript Basics",
+      "courseAuthor": "John Doe",
+      "price": 2000,
+      "image": "/courseImage.png",
+      "language": "Tamil",
+      "paid": "paid"
+    },
+    {
+      "id": 2,
+      "courseType": "Web Development",
+      "ratings": 4.8,
+      "courseName": "React Fundamentals",
+      "courseAuthor": "Jane Smith",
+      "price": 2500,
+      "image": "/courseImage.png",
+      "language": "English",
+      "paid": "paid"
+    },
+    {
+      "id": 3,
+      "courseType": "Data Science",
+      "ratings": 4.7,
+      "courseName": "Python for Data Science",
+      "courseAuthor": "Emily Johnson",
+      "price": 3000,
+      "image": "/courseImage.png",
+      "language": "English",
+      "paid": "paid"
+    },
+    {
+      "id": 4,
+      "courseType": "Programming",
+      "ratings": 4.6,
+      "courseName": "Advanced JavaScript",
+      "courseAuthor": "Michael Brown",
+      "price": 2200,
+      "image": "/courseImage.png",
+      "language": "English",
+      "paid": "paid"
+    },
+    {
+      "id": 5,
+      "courseType": "Mobile Development",
+      "ratings": 4.9,
+      "courseName": "Flutter Development",
+      "courseAuthor": "Sarah Williams",
+      "price": 2700,
+      "image": "/courseImage.png",
+      "language": "Hindi",
+      "paid": "paid"
+    },
+    {
+      "id": 6,
+      "courseType": "Web Development",
+      "ratings": 4.7,
+      "courseName": "Vue.js Fundamentals",
+      "courseAuthor": "David Wilson",
+      "price": 2300,
+      "image": "/courseImage.png",
+      "language": "English",
+      "paid": "paid"
+    },
+    {
+      "id": 7,
+      "courseType": "Data Science",
+      "ratings": 4.8,
+      "courseName": "R for Data Science",
+      "courseAuthor": "Olivia Taylor",
+      "price": 2900,
+      "image": "/courseImage.png",
+      "language": "English",
+      "paid": "paid"
+    },
+    {
+      "id": 8,
+      "courseType": "Artificial Intelligence",
+      "ratings": 4.6,
+      "courseName": "Machine Learning with Python",
+      "courseAuthor": "James Anderson",
+      "price": 3500,
+      "image": "/courseImage.png",
+      "language": "English",
+      "paid": "paid"
+    },
+    {
+      "id": 9,
+      "courseType": "Game Development",
+      "ratings": 4.4,
+      "courseName": "Unreal Engine for Beginners",
+      "courseAuthor": "Isabella Martinez",
+      "price": 2800,
+      "image": "/courseImage.png",
+      "language": "English",
+      "paid": "paid"
+    },
+    {
+      "id": 10,
+      "courseType": "Cloud Computing",
+      "ratings": 4.7,
+      "courseName": "AWS Cloud Essentials",
+      "courseAuthor": "Liam Rodriguez",
+      "price": 0,
+      "image": "/courseImage.png",
+      "language": "English",
+      "paid": "free"
+    }
+  ]
+}
