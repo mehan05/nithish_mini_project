@@ -4,10 +4,12 @@ import { Link, useLocation } from "react-router-dom";
 import StudentNavBar from "../../student/components/SrudentNavbar/StudentNavBar";
 import Reminders from "../../smallcomponents/Remainders";
 import FeedBackCard from "../../smallcomponents/FeedBackCard";
+import Chatbot from "../../student/components/Chatbot";
 
 function Landing() {
   const [toggle, setToggle] = useState(false);
   const [feedbackToogle, setFeedbackToogle] = useState(false);
+  const [chatbotOpen, setChatbotOpen] = useState(false);
   const location = useLocation();
   const [selectedCategory, setSelectedCategory] = useState("All Courses");
   const[expand,setExpand]=useState(false);
@@ -90,10 +92,15 @@ function Landing() {
           </div>
         )}
         
-        <div className="fixed right-4 bottom-6 lg:right-5 lg:top-[650px] lg:bottom-auto z-10">
-          <button onClick={() => setFeedbackToogle(!feedbackToogle)}>
-            <img src="/feedback-icon.png" alt="feedback" className="h-14 w-14 sm:h-16 sm:w-16 md:h-20 md:w-20" />
+        <div className="fixed right-4 bottom-6 lg:right-5 lg:top-[650px] lg:bottom-auto z-10 flex flex-col gap-4">
+          <button onClick={() => setChatbotOpen(true)} className="bg-blue-500 hover:bg-blue-600 text-white rounded-full p-3 shadow-lg">
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+            </svg>
           </button>
+          {/* <button onClick={() => setFeedbackToogle(!feedbackToogle)}>
+            <img src="/feedback-icon.png" alt="feedback" className="h-14 w-14 sm:h-16 sm:w-16 md:h-20 md:w-20" />
+          </button> */}
         </div>
         <div className="w-full text-center py-10">
           <p className="text-2xl md:text-4xl font-semibold text-gray-700">
@@ -292,7 +299,7 @@ function Landing() {
         </div>
         
         </div >
-        <div className="z-50">
+        {/* <div className="z-50">
           {expand ? (
             <div className={`fixed top-0 left-0 w-full h-full flex justify-center items-center z-50`}>
               {feedbackToogle && <FeedBackCard handleExpand={handleExpand} />}
@@ -302,7 +309,9 @@ function Landing() {
               {feedbackToogle && <FeedBackCard handleExpand={handleExpand} />}
             </div>
           )}
-        </div>
+        </div> */}
+        
+        <Chatbot isOpen={chatbotOpen} onClose={() => setChatbotOpen(false)} />
       </div>
   );
 }

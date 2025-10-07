@@ -1,64 +1,46 @@
-import ModuleDescription from "../components/ModuleBar/ModuleBar";
-import PaymentCard from "../components/PaymentCard/PaymentCard";
-import QuickContactForm from "../components/QuickContactCard/QuickContactCard";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import StudentNavBar from "../components/SrudentNavbar/StudentNavBar";
+import { BASE_API } from "../../../apis/apis";
+import { useParams } from "react-router-dom";
 
 const ModulePage = () => {
-  const courseModule = [
-    {
-    moduleNumber: 1,
-    title: "What is Laravel? (Intro)",
-    price: "15.00",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-    learnings: [
-      "Work with color & Gradients & Grids",
-      "All the useful shortcuts",
-      "Be able to create Flyers, Brochures, Advertisements",
-      "How to work with Images & Text"
-    ]
-  },
-    {
-    moduleNumber: 1,
-    title: "What is Laravel? (Intro)",
-    price: "15.00",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-    learnings: [
-      "Work with color & Gradients & Grids",
-      "All the useful shortcuts",
-      "Be able to create Flyers, Brochures, Advertisements",
-      "How to work with Images & Text"
-    ]
-  },
-    {
-    moduleNumber: 1,
-    title: "What is Laravel? (Intro)",
-    price: "15.00",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-    learnings: [
-      "Work with color & Gradients & Grids",
-      "All the useful shortcuts",
-      "Be able to create Flyers, Brochures, Advertisements",
-      "How to work with Images & Text"
-    ]
-  },
-    {
-    moduleNumber: 1,
-    title: "What is Laravel? (Intro)",
-    price: "15.00",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-    learnings: [
-      "Work with color & Gradients & Grids",
-      "All the useful shortcuts",
-      "Be able to create Flyers, Brochures, Advertisements",
-      "How to work with Images & Text"
-    ]
-  },
-  
-];
+  const { id } = useParams();
+  const [course, setCourse] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchCourse = async () => {
+      try {
+        const response = await axios.get(`${BASE_API}/get-course/${id}`);
+        setCourse(response.data.data);
+      } catch (error) {
+        console.error("Error fetching course:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    if (id) {
+      fetchCourse();
+    }
+  }, [id]);
+
+  if (loading) {
+    return (
+      <div className="h-screen flex items-center justify-center">
+        <div className="text-xl">Loading...</div>
+      </div>
+    );
+  }
+
+  if (!course) {
+    return (
+      <div className="h-screen flex items-center justify-center">
+        <div className="text-xl text-red-500">Course not found</div>
+      </div>
+    );
+  }
   return (
     <div className="h-screen">
 
@@ -67,74 +49,64 @@ const ModulePage = () => {
         </div>
       <div className=" scale-95">
 
-      <div className="flex justify-between gap-5">
+      <div className="flex justify-center">
 
-          <div className="text-wrap flex flex-col  ">
+          <div className="text-wrap flex flex-col max-w-4xl w-full">
             
-            <div className="flex flex-col gap-5 pl-5 max-w-[1200px] w-[892px] ml-10">
+            <div className="flex flex-col gap-5 px-5">
               <div className="">
-                <img
-                  src="/courseImage.png"
-                  alt=""
-                  className="w-full h-[454.85px] object-cover rounded-lg"
-                />
+                {course.videoUrl ? (
+                  <div className="w-full">
+                    <video
+                      src={course.videoUrl}
+                      controls
+                      autoPlay
+                      playsInline
+                      className="w-full h-[500px] object-cover rounded-lg"
+                    >
+                      <source src={course.videoUrl} type="video/mp4" />
+                      <source src={course.videoUrl} type="video/webm" />
+                      <source src={course.videoUrl} type="video/ogg" />
+                      Your browser does not support the video tag.
+                    </video>
+                  </div>
+                ) : (
+                  <img
+                    src={course.imageUrl || "/courseImage.png"}
+                    alt={course.title}
+                    className="w-full h-[500px] object-cover rounded-lg"
+                  />
+                )}
                 
                 <div className="mt-5 flex justify-start gap-20 items-center">
-                  <p className="p-2 bg-[#EFEFF2] rounded-3xl">Development</p>
+                  <p className="p-2 bg-[#EFEFF2] rounded-3xl">{course.traineeName}</p>
                   <div className="flex gap-2">
                     <img
                       src="/calendar-icon.png"
                       className="w-[32px] h-[32px]"
                       alt=""
                     />
-                    <p className="text-[#7F7E97]">24/07/2024</p>
+                    <p className="text-[#7F7E97]">{new Date(course.createdAt).toLocaleDateString()}</p>
                   </div>
                   <div className="flex gap-2">
                     <img src="/cap-icon.png" className="w-[32px] h-[32px] " alt="" />
-                    <p className="text-[#7F7E97] text-sm">2350 Students enrolled</p>
+                    <p className="text-[#7F7E97] text-sm">Course by {course.traineeName}</p>
                   </div>  
-                  <div className="flex ">
-                    <p className="text-[#7F7E97]">⭐(4.8 reviews)</p>
-                  </div>
                 </div>
 
                 <div className="flex justify-start gap-[100px] items-center mt-5">
                   <div className="text-[#5751E1] text-[30px] font-bold ml-10">
-                    Course Name
-                  </div>
-
-                  <div className="">
-                    <p className="text-gray-500">
-                      By <span className="text-lg text-[#161439]">Trainee Name</span>
-                    </p>
+                    {course.title}
                   </div>
                 </div>
 
                 <div className="mt-3 ml-10">
                   <h4 className="text-[#161439] font-semibold text-lg mb-4">Description:</h4>
                   <p className="text-gray-700 mb-10">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut blanditiis modi ipsa libero fuga, minima dignissimos earum ipsam quaerat odio officiis, saepe incidunt tempora consequuntur eveniet dolores similique. Sapiente, perspiciatis!
-                    Labore eius nam quae, eveniet saepe eaque? Repellat excepturi unde voluptatum dolore esse sequi aperiam qui numquam doloremque deleniti, provident ipsum placeat minima magnam eveniet itaque, illo error porro distinctio.
+                    {course.description}
                   </p>
-                    <div className="">
-                      {courseModule.map((module ,key) => (
-                          <div key={key}>
-                              <ModuleDescription module={module}
-                              />
-                          </div>
-                      ))}
-                    </div>
                 </div>
               </div>
-            </div>
-          </div>
-          <div className="flex flex-col gap-5  w-[350px] sticky top-10 ">
-
-            <div  >
-              <PaymentCard />
-            </div>
-            <div >
-              <QuickContactForm />
             </div>
           </div>
       </div>

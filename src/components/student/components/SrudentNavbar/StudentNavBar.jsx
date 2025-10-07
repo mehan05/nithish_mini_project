@@ -62,7 +62,7 @@ const StudentNavBar = () => {
         </div>
 
         <div className="flex items-center gap-4 mt-4 md:mt-0">
-          {window.location.pathname.startsWith('/student') && (
+          {/* {window.location.pathname.startsWith('/student') && (
             <Link to="/student/quiz">
               <button
                 className="bg-yellow-500 font-poppins hover:bg-yellow-600 text-black  py-1 font-semibold px-6 rounded-full"
@@ -70,7 +70,7 @@ const StudentNavBar = () => {
                 Test
               </button>
             </Link>
-          )}
+          )} */}
 
           {window.location.pathname.startsWith('/trainee') && (
             <div className="bg-blue-500 font-poppins hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-full flex items-center gap-2">

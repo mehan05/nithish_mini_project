@@ -3,12 +3,13 @@ import CourseCards from "../components/CourseCards/CourseCards";
 import MyContext from "../../../context/context";
 import axios from "axios";
 import TraineeNavbar from "../components/TraineeNavbar/TraineeNavbar";
+import { BASE_API } from "../../../apis/apis";
 
 const MyCourses = () => {
   const { courses, setCourses } = useContext(MyContext);
 
   const api = axios.create({
-    baseURL: "http://localhost:5000",
+    baseURL: BASE_API,
     headers: {
       "Content-Type": "application/json",
     },
@@ -16,13 +17,16 @@ const MyCourses = () => {
 
   const getCourses = async () => {
     try {
-      const response = await api.get("/courses");
-      setCourses(response.data);
+      console.log("gert course");
+      
+      const response = await api.get("/get-course");
+      setCourses(response.data.data);
     } catch (error) {
       console.log(error);
     }
   };
-
+  console.log("course",courses);
+  
   useEffect(() => {
     getCourses();
   }, []);
@@ -39,7 +43,7 @@ const MyCourses = () => {
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
         {courses.map((course, id) => (
-          <CourseCards key={id} course={course} />
+          <CourseCards key={course?._id || id} course={course} />
         ))}
       </div>
     </div>

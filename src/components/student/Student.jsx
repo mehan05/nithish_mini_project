@@ -9,12 +9,13 @@ import axios from 'axios'
 import QuestionPage from './questionpage/QuestionPage'
 import EnrolledCourse from './Dashboard/EnrolledCourse/EnrolledCourse'
 import Dashboard from './Dashboard/DashBoard'
+import { BASE_API } from '../../apis/apis'
 
 const Student = () => {
   const {setCourses} = useContext(MyContext);
 
   const api = axios.create({
-    baseURL:"http://localhost:5000",
+    baseURL:BASE_API,
     headers:{
         "Content-Type":"application/json",
     }
@@ -35,10 +36,10 @@ try{
         <Routes>
           <Route path='home' element={<Landing/>} />
           <Route  path='quiz' element={<TestPage/>} />
-          <Route path='quiz/quizpage' element={<QuestionPage/>} />
+          <Route path='quizpage' element={<QuestionPage/>} />
           <Route path='mycourses' element={<Course/>} />
           <Route path='dashboard' element={<Dashboard/>} />
-          <Route path='mycourses/modules' element={<ModulePage/>} />
+          <Route path='mycourses/:id/modules' element={<ModulePage/>} />
           <Route path='/home/modules' element={<ModulePage/>} />
         </Routes>
     </div>

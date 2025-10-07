@@ -12,12 +12,13 @@ import { useContext, useEffect } from 'react';
 import MyContext from './context/context';
 import axios from 'axios';
 import EnrolledCourse from './components/student/Dashboard/EnrolledCourse/EnrolledCourse';
+import { BASE_API } from './apis/apis';
 
 function App() {
   const { courses, setCourses } = useContext(MyContext);
 
   const api = axios.create({
-    baseURL: "http://localhost:5000",
+    baseURL:BASE_API,
     headers: {
       "Content-Type": "application/json",
     },
@@ -44,10 +45,10 @@ function App() {
         <Route path='/student/*' element={<Student />} />
         <Route path='/quiz' element={<QuestionPage/>} /> 
         <Route path='remainders' element={<Remainders/>} />
-        <Route path='FeedBackCard' element={<FeedBackCard/>} />
+        {/* <Route path='FeedBackCard' element={<FeedBackCard/>} /> */}
         <Route path='coursecards' element={<CourseCards/>} />
         <Route path='landing' element={<Landing/>} />
-        <Route path='trainee/feecback' element={<FeedBackCard/>}/>
+        {/* <Route path='trainee/feecback' element={<FeedBackCard/>}/> */}
       </Routes>
     </div>
   );
