@@ -3,17 +3,20 @@ import axios from "axios";
 import StudentNavBar from "../components/SrudentNavbar/StudentNavBar";
 import { BASE_API } from "../../../apis/apis";
 import { useParams } from "react-router-dom";
+import YouTubeDetails from "../../common/youtube/YoutubeDetails";
 
 const ModulePage = () => {
   const { id } = useParams();
   const [course, setCourse] = useState(null);
   const [loading, setLoading] = useState(true);
+  const[fileName,setFileName]=useState("");
 
   useEffect(() => {
     const fetchCourse = async () => {
       try {
         const response = await axios.get(`${BASE_API}/get-course/${id}`);
         setCourse(response.data.data);
+        setFileName(response.data.data.videoUrl.split("/").pop());
       } catch (error) {
         console.error("Error fetching course:", error);
       } finally {
@@ -33,7 +36,8 @@ const ModulePage = () => {
       </div>
     );
   }
-
+  console.log("testing",course);
+  
   if (!course) {
     return (
       <div className="h-screen flex items-center justify-center">
@@ -58,6 +62,8 @@ const ModulePage = () => {
                 {course.videoUrl ? (
                   <div className="w-full">
                     <video
+                      // src={`./backend/uploads/videos/${course.videoPath}`}
+                      // src={`http://localhost:3000${course.videoPath}`}
                       src={course.videoUrl}
                       controls
                       autoPlay
@@ -101,11 +107,23 @@ const ModulePage = () => {
                 </div>
 
                 <div className="mt-3 ml-10">
-                  <h4 className="text-[#161439] font-semibold text-lg mb-4">Description:</h4>
-                  <p className="text-gray-700 mb-10">
-                    {course.description}
-                  </p>
-                </div>
+                <h4 className="text-[#161439] font-semibold text-lg mb-4">Description:</h4>
+                <p className="text-gray-700 mb-10 break-words whitespace-pre-wrap">
+                  {course.description}
+                </p>
+              </div>
+
+
+               {course.youtubeUrls.length > 0 && (
+          <div className="space-y-6 mb-8 flex items-center gap-3 w-full">
+            {course.youtubeUrls.map((link, index) => (
+              <div key={index} className="w-full">
+                <YouTubeDetails videoUrl={link} />
+              </div>
+            ))}
+          </div>
+        )}
+
               </div>
             </div>
           </div>
